@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #c8a96e;
+  --color-primary-dark: #a8864a;
+  --color-primary-foreground: #ffffff;
+  --color-background: #ffffff;
+  --color-foreground: #111827;
+  --color-muted: #f9fafb;
+  --color-muted-foreground: #6b7280;
+  --color-border: #e5e7eb;
+  --color-card: #ffffff;
+  --color-card-foreground: #111827;
+
+  /* Dark mode tokens surfaced as CSS vars for inline usage */
+  --color-dark-bg: #0d0d0d;
+  --color-dark-surface: #161616;
+  --color-dark-surface2: #1f1f1f;
+  --color-dark-border: #2a2a2a;
+  --color-dark-text: #f5f5f5;
+  --color-dark-muted: #888888;
+
+  --font-sans: var(--font-montserrat), system-ui, sans-serif;
+}
+
+/* ── Dark mode overrides ─────────────────────────────── */
+.dark {
+  --color-background: #0d0d0d;
+  --color-foreground: #f5f5f5;
+  --color-muted: #161616;
+  --color-muted-foreground: #888888;
+  --color-border: #2a2a2a;
+  --color-card: #161616;
+  --color-card-foreground: #f5f5f5;
+}
+
+/* ── Base ────────────────────────────────────────────── */
+@layer base {
+  * {
+    border-color: var(--color-border);
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    @apply antialiased;
+    transition: background-color 0.4s ease, color 0.3s ease;
+  }
+}
+
+/* ── Components ──────────────────────────────────────── */
+@layer components {
+  /* Aventis-style top-bar */
+  .top-bar {
+    @apply bg-[#111] text-gray-400 text-xs py-2.5;
+  }
+  .dark .top-bar {
+    @apply bg-[#080808] text-gray-500;
+  }
+
+  /* Navbar */
+  .navbar-transparent {
+    @apply bg-transparent border-transparent;
+  }
+  .navbar-scrolled {
+    @apply bg-white/95 dark:bg-[#111]/95 backdrop-blur-2xl border-b border-border shadow-sm;
+  }
+
+  /* Section label pill */
+  .section-label {
+    @apply inline-flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-[0.25em] mb-4;
+  }
+
+  /* Primary button – Aventis gold outline style */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-white text-sm font-bold rounded-none 
+           hover:bg-primary-dark transition-all duration-300 uppercase tracking-widest;
+  }
+
+  /* Secondary / outline button */
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-7 py-3.5 border border-foreground text-foreground text-sm font-bold 
+           rounded-none hover:bg-foreground hover:text-background transition-all duration-300 uppercase tracking-widest;
+  }
+
+  /* Card – Aventis style: no rounded corners, thin border */
+  .aventis-card {
+    @apply bg-card border border-border p-8 transition-all duration-300 hover:border-primary/50 hover:shadow-lg;
+  }
+
+  /* Nav link */
+  .nav-link {
+    @apply relative text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200 
+           after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-primary after:transition-all hover:after:w-full;
+  }
+
+  /* Stat number */
+  .stat-number {
+    @apply text-5xl font-black text-primary leading-none;
+  }
+}
+
+/* ── Utilities ───────────────────────────────────────── */
+.text-gradient {
+  background: linear-gradient(135deg, #c8a96e 0%, #e8c98e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Divider line with gold */
+.section-divider {
+  width: 48px;
+  height: 3px;
+  background: #c8a96e;
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+/* ── Animations ─────────────────────────────────────── */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  display: flex;
+  width: fit-content;
+  animation: marquee 35s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fadeUp 0.7s ease forwards;
+}
+
+/* Accordion */
+.faq-item {
+  @apply border-b border-border;
+}
