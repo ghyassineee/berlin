@@ -13,7 +13,7 @@ export default function Services() {
   const activeService = content.services[activeIndex];
 
   return (
-    <section id="services" className="py-28 bg-white dark:bg-[#0d0d0d]">
+    <section id="services" className="py-28 section-bg">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
 
         {/* Header */}
@@ -39,18 +39,18 @@ export default function Services() {
         </div>
 
         {/* Two-panel layout: left tabs, right detail */}
-        <div className="grid lg:grid-cols-5 gap-0 border border-border">
+        <div className="grid lg:grid-cols-5 gap-0 lg:border lg:border-border">
 
           {/* LEFT – Service Tab List */}
-          <div className="lg:col-span-2 bg-[#f8f7f4] dark:bg-[#111] border-r border-border">
+          <div className="lg:col-span-2 muted-bg lg:border-r lg:border-border">
             {content.services.map((service, index) => (
               <button
                 key={service.id}
                 onClick={() => setActiveIndex(index)}
-                className={`w-full text-left px-8 py-7 border-b border-border transition-all duration-300 group flex items-center justify-between ${
+                className={`w-full text-left px-6 sm:px-8 py-6 sm:py-7 border-b border-border transition-all duration-300 group flex items-center justify-between ${
                   activeIndex === index
-                    ? 'bg-white dark:bg-[#1a1a1a] border-l-2 border-l-primary'
-                    : 'hover:bg-white/50 dark:hover:bg-[#161616]'
+                    ? 'muted-bg border-l-2 border-l-primary'
+                    : 'hover:muted-bg/95'
                 }`}
               >
                 <div>
@@ -70,7 +70,7 @@ export default function Services() {
           </div>
 
           {/* RIGHT – Service Detail */}
-          <div className="lg:col-span-3 p-10 md:p-14 bg-white dark:bg-[#0d0d0d]">
+          <div className="lg:col-span-3 p-6 md:p-14 card-bg">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIndex}
@@ -100,17 +100,25 @@ export default function Services() {
                 </div>
 
                 {/* Reference Projects */}
-                {activeService.projects.length > 0 && (
+                {activeService.projects && activeService.projects.length > 0 && (
                   <div className="border-t border-border pt-8">
                     <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground mb-4">
                       {language === 'de' ? 'Referenzprojekte' : 'Reference Projects'}
                     </p>
-                    {activeService.projects.map((project, i) => (
-                      <div key={i} className="bg-[#f8f7f4] dark:bg-[#161616] border border-border p-5">
-                        <p className="font-black text-foreground mb-1">{project.name}</p>
-                        <p className="text-sm text-muted-foreground">{project.desc[language]}</p>
-                      </div>
-                    ))}
+                    <div className="flex gap-4 md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory touch-pan-x pb-4 md:pb-0 items-stretch">
+                      {activeService.projects.map((project, i) => (
+                        <div key={i} className="card-bg border border-border p-4 min-w-[85%] sm:min-w-[70%] md:min-w-0 snap-center flex-shrink-0">
+                          <div className="grid grid-cols-3 gap-2 mb-3">
+                            {(project.images || []).slice(0,3).map((img: string, idx: number) => (
+                              // using simple img tag to avoid extra next/image layout complexity here
+                              <img key={idx} src={img} alt={`${project.name} ${idx+1}`} className="w-full h-20 object-cover" />
+                            ))}
+                          </div>
+                          <p className="font-black text-foreground mb-1">{project.name}</p>
+                          <p className="text-sm text-muted-foreground">{project.desc[language]}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
 

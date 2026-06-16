@@ -8,7 +8,7 @@ export default function Partners() {
   const partners = ['VICUS AG Leipzig', 'Kaiser-Wilhelm-Passage', 'Contipark', 'VICUS AG Leipzig', 'Kaiser-Wilhelm-Passage', 'Contipark'];
 
   return (
-    <section className="py-14 bg-[#f8f7f4] dark:bg-[#111] border-y border-border">
+    <section className="py-14 muted-bg border-y border-border">
       <div className="max-w-7xl mx-auto px-8 mb-8 text-center">
         <motion.p
           initial={{ opacity: 0 }}

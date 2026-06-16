@@ -22,7 +22,7 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="py-28 bg-[#f8f7f4] dark:bg-[#0d0d0d]">
+    <section id="about" className="py-28 muted-bg">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 

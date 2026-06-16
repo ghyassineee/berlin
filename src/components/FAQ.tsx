@@ -54,7 +54,7 @@ export default function FAQ() {
   ];
 
   return (
-    <section className="py-28 bg-[#f8f7f4] dark:bg-[#111]">
+    <section className="py-28 muted-bg">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         <div className="grid lg:grid-cols-5 gap-16">
           {/* Left Label */}

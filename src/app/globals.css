@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #c8a96e;
-  --color-primary-dark: #a8864a;
+  --color-primary: #25D366;
+  --color-primary-dark: #20b85a;
   --color-primary-foreground: #ffffff;
-  --color-background: #ffffff;
-  --color-foreground: #111827;
-  --color-muted: #f9fafb;
+  --color-background: #f8fafc;
+  --color-foreground: #0f1721;
+  --color-muted: #f3f4f6;
   --color-muted-foreground: #6b7280;
-  --color-border: #e5e7eb;
+  --color-border: #e6e9ee;
   --color-card: #ffffff;
   --color-card-foreground: #111827;
 
@@ -48,6 +48,11 @@
     color: var(--color-foreground);
     @apply antialiased;
     transition: background-color 0.4s ease, color 0.3s ease;
+  }
+
+  /* Prevent accidental horizontal overflow on small screens (fixes mobile right padding) */
+  html, body {
+    overflow-x: hidden;
   }
 }
 
@@ -91,6 +96,32 @@
     @apply bg-card border border-border p-8 transition-all duration-300 hover:border-primary/50 hover:shadow-lg;
   }
 
+  /* Section background that follows theme variables */
+  .section-bg {
+    background-color: var(--color-background);
+  }
+
+  /* Muted / subtle panel background */
+  .muted-bg {
+    background-color: var(--color-muted);
+  }
+
+  /* Card background (content panels) */
+  .card-bg {
+    background-color: var(--color-card);
+  }
+
+  /* Input-like background */
+  .input-bg {
+    background-color: var(--color-muted);
+  }
+
+  /* Force dark-mode text color for a subtree (useful to keep hero/navbar text dark in light mode) */
+  .force-dark-text,
+  .force-dark-text * {
+    color: var(--color-dark-text) !important;
+  }
+
   /* Nav link */
   .nav-link {
     @apply relative text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200 
@@ -105,7 +136,7 @@
 
 /* ── Utilities ───────────────────────────────────────── */
 .text-gradient {
-  background: linear-gradient(135deg, #c8a96e 0%, #e8c98e 100%);
+  background: linear-gradient(135deg, #25D366 0%, #6fe089 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -115,7 +146,7 @@
 .section-divider {
   width: 48px;
   height: 3px;
-  background: #c8a96e;
+  background: var(--color-primary);
   display: block;
   margin-bottom: 1.5rem;
 }

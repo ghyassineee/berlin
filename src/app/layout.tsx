@@ -12,6 +12,9 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: "Urban Facility Berlin | Sauber. Sicher. Effizient.",
   description: "Professionelles Facility Management in Berlin. Tiefgaragenreinigung, Haustechnik und Objektservice.",
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({

@@ -24,7 +24,7 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 w-full pt-36 pb-24">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 w-full pt-36 pb-24 force-dark-text">
         <div className="max-w-2xl">
           {/* Section Label */}
           <motion.div

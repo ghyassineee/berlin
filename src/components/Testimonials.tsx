@@ -1,5 +1,6 @@
-'use client';
+"use client";
 
+import { useEffect, useRef } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { content } from '@/data/content';
 import { motion } from 'framer-motion';
@@ -35,8 +36,51 @@ export default function Testimonials() {
     },
   ];
 
+  // Autoplay for mobile carousel
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    let timer: number | undefined;
+    const children = Array.from(el.children) as HTMLElement[];
+    if (children.length <= 1) return;
+
+    const advance = () => {
+      const idx = children.findIndex((child) => Math.abs(child.offsetLeft - el.scrollLeft) < 2);
+      const current = idx === -1 ? 0 : idx;
+      const next = (current + 1) % children.length;
+      el.scrollTo({ left: children[next].offsetLeft, behavior: 'smooth' });
+    };
+
+    const start = () => {
+      stop();
+      timer = window.setInterval(advance, 4000);
+    };
+
+    const stop = () => {
+      if (timer) {
+        window.clearInterval(timer);
+        timer = undefined;
+      }
+    };
+
+    // Always start autoplay (advances every few seconds)
+    start();
+
+    el.addEventListener('pointerenter', stop);
+    el.addEventListener('pointerleave', start);
+
+    return () => {
+      stop();
+      el.removeEventListener('pointerenter', stop);
+      el.removeEventListener('pointerleave', start);
+    };
+  }, []);
+
   return (
-    <section id="testimonials" className="py-28 bg-white dark:bg-[#0d0d0d]">
+    <section id="testimonials" className="py-28 section-bg">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         {/* Header */}
         <div className="grid lg:grid-cols-2 gap-8 mb-16">
@@ -69,8 +113,8 @@ export default function Testimonials() {
           </div>
         </div>
 
-        {/* Reviews Grid */}
-        <div className="grid md:grid-cols-3 gap-px bg-border">
+        {/* Reviews — grid on md+, horizontal snap carousel on small screens */}
+        <div ref={containerRef} className="md:grid md:grid-cols-3 gap-px bg-border flex md:flex-none overflow-x-auto md:overflow-visible snap-x snap-mandatory items-stretch overflow-y-hidden">
           {reviews.map((review, i) => (
             <motion.div
               key={i}
@@ -78,7 +122,7 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="bg-white dark:bg-[#0d0d0d] p-8 md:p-10 flex flex-col"
+              className="card-bg p-8 md:p-10 flex flex-col min-w-full md:min-w-0 snap-center min-h-[70vh] md:h-full"
             >
               {/* Stars */}
               <div className="flex gap-1 mb-6">
@@ -88,16 +132,16 @@ export default function Testimonials() {
               </div>
 
               {/* Quote mark */}
-              <Quote size={30} className="text-primary/20 mb-4 flex-shrink-0" />
+              <Quote size={30} className="text-primary/20 mb-4 shrink-0" />
 
               {/* Quote text */}
-              <p className="text-foreground/80 font-medium leading-relaxed flex-grow mb-8 italic">
+              <p className="text-foreground/80 font-medium leading-relaxed grow mb-8 italic">
                 "{review.quote[language]}"
               </p>
 
               {/* Author */}
               <div className="border-t border-border pt-6 flex items-center gap-4">
-                <div className="w-10 h-10 bg-primary flex items-center justify-center text-white font-black text-sm flex-shrink-0">
+                <div className="w-10 h-10 bg-primary flex items-center justify-center text-white font-black text-sm shrink-0">
                   {review.author[0]}
                 </div>
                 <div>

@@ -24,7 +24,7 @@ export default function ContactForm() {
   };
 
   return (
-    <section id="contact" className="py-28 bg-white dark:bg-[#0d0d0d]">
+    <section id="contact" className="py-28 section-bg">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
 
         {/* Header */}
@@ -42,14 +42,14 @@ export default function ContactForm() {
 
         <div className="grid lg:grid-cols-5 gap-0 border border-border">
           {/* LEFT – Contact info */}
-          <div className="lg:col-span-2 bg-[#111] dark:bg-[#080808] p-10 md:p-14 text-white">
+          <div className="lg:col-span-2 muted-bg p-10 md:p-14 text-foreground">
             <div className="flex items-center gap-3 mb-3">
               <span className="block w-6 h-px bg-primary" />
               <span className="text-primary text-[10px] font-black uppercase tracking-[0.3em]">
                 {language === 'de' ? 'Direktkontakt' : 'Direct contact'}
               </span>
             </div>
-            <h3 className="text-3xl font-black tracking-tight leading-tight mb-10 text-white">
+            <h3 className="text-3xl font-black tracking-tight leading-tight mb-10 text-foreground">
               {language === 'de' ? 'Starten wir Ihr Projekt.' : "Let's start your project."}
             </h3>
 
@@ -75,12 +75,12 @@ export default function ContactForm() {
                 },
               ].map((item, i) => (
                 <div key={i} className="flex gap-5 group">
-                  <div className="w-10 h-10 flex items-center justify-center bg-white/5 border border-white/10 group-hover:bg-primary group-hover:border-primary transition-all duration-300 flex-shrink-0 mt-0.5">
+                    <div className="w-10 h-10 flex items-center justify-center bg-white/5 border border-white/10 group-hover:bg-primary group-hover:border-primary transition-all duration-300 flex-shrink-0 mt-0.5">
                     {item.icon}
                   </div>
                   <div>
                     <p className="text-[10px] font-black uppercase tracking-[0.25em] text-gray-500 mb-0.5">{item.label}</p>
-                    <p className="font-bold text-white text-sm">{item.value}</p>
+                    <p className="font-bold text-foreground text-sm">{item.value}</p>
                     <p className="text-gray-500 text-xs mt-0.5">{item.sub}</p>
                   </div>
                 </div>
@@ -98,7 +98,7 @@ export default function ContactForm() {
           </div>
 
           {/* RIGHT – Form */}
-          <div className="lg:col-span-3 p-10 md:p-14 bg-white dark:bg-[#0d0d0d]">
+          <div className="lg:col-span-3 p-10 md:p-14 card-bg">
             {isSuccess ? (
               <div className="h-full flex items-center justify-center text-center py-20">
                 <div>
@@ -125,7 +125,7 @@ export default function ContactForm() {
                       value={formState.name}
                       onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                       placeholder={language === 'de' ? 'Max Mustermann' : 'John Smith'}
-                      className="w-full border border-border bg-[#f8f7f4] dark:bg-[#111] px-4 py-3.5 text-sm font-medium text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
+                      className="w-full border border-border input-bg px-4 py-3.5 text-sm font-medium text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
                     />
                   </div>
                   <div>
@@ -137,7 +137,7 @@ export default function ContactForm() {
                       value={formState.email}
                       onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                       placeholder="email@beispiel.de"
-                      className="w-full border border-border bg-[#f8f7f4] dark:bg-[#111] px-4 py-3.5 text-sm font-medium text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
+                      className="w-full border border-border input-bg px-4 py-3.5 text-sm font-medium text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
                     />
                   </div>
                 </div>
@@ -151,7 +151,7 @@ export default function ContactForm() {
                     value={formState.phone}
                     onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
                     placeholder={language === 'de' ? '+49 30 000 0000' : '+49 30 000 0000'}
-                    className="w-full border border-border bg-[#f8f7f4] dark:bg-[#111] px-4 py-3.5 text-sm font-medium text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
+                    className="w-full border border-border input-bg px-4 py-3.5 text-sm font-medium text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
                   />
                 </div>
 
@@ -164,7 +164,7 @@ export default function ContactForm() {
                     value={formState.message}
                     onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                     placeholder={language === 'de' ? 'Beschreiben Sie Ihr Objekt und Ihre Anforderungen…' : 'Describe your property and requirements…'}
-                    className="w-full border border-border bg-[#f8f7f4] dark:bg-[#111] px-4 py-3.5 text-sm font-medium text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors resize-none"
+                    className="w-full border border-border input-bg px-4 py-3.5 text-sm font-medium text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors resize-none"
                   />
                 </div>
 

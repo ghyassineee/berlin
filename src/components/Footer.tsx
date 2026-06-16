@@ -1,5 +1,6 @@
-'use client';
+"use client";
 
+import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 import { content } from '@/data/content';
 
@@ -7,7 +8,7 @@ export default function Footer() {
   const { language } = useLanguage();
 
   return (
-    <footer className="bg-[#0d0d0d] text-white">
+    <footer className="section-bg text-foreground">
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-6 md:px-8 py-20">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
@@ -15,9 +16,11 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-9 h-9 bg-primary flex items-center justify-center text-white font-black text-lg">U</div>
+              <div className="w-9 h-9 flex items-center justify-center">
+                <Image src="/logo.png" alt="UFB" width={36} height={36} className="object-contain" />
+              </div>
               <div>
-                <p className="text-sm font-black text-white tracking-tight">UFB</p>
+                <p className="text-sm font-black text-foreground tracking-tight">UFB</p>
                 <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-gray-500">Urban Facility Berlin</p>
               </div>
             </div>
@@ -28,8 +31,8 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-2">
               <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary" />
+                <span style={{ backgroundColor: 'var(--color-primary)' }} className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60" />
+                <span style={{ backgroundColor: 'var(--color-primary)' }} className="relative inline-flex rounded-full h-2.5 w-2.5" />
               </span>
               <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">
                 {language === 'de' ? '24/7 Verfügbar in Berlin' : '24/7 Available in Berlin'}

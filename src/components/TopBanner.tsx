@@ -8,7 +8,7 @@ export default function TopBanner() {
   const { language } = useLanguage();
 
   return (
-    <div className="bg-primary text-white py-2.5 overflow-hidden relative z-[60]">
+    <div id="top-banner" className="bg-primary text-white py-2.5 overflow-hidden relative z-[50]">
       <div className="animate-marquee flex items-center gap-16">
         {[...Array(8)].map((_, i) => (
           <span key={i} className="text-[10px] font-black uppercase tracking-[0.3em] flex items-center gap-4 whitespace-nowrap">
